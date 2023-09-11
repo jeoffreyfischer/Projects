@@ -1,9 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using projects_api.Data;
+
+string MyAngularFrontend = "MyAngularFrontend";
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ProjectDbContext>(options => options.UseSqlServer(databaseConnectionString));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAngularFrontend, policy =>
+    {
+        policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,6 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAngularFrontend);
 
 app.UseAuthorization();
 
