@@ -1,0 +1,32 @@
+<h1 class="title">Projects List</h1>
+
+<div class="search-add-button-container">
+    <div class="search-div">
+        <input type="search" class="form-control search-input" placeholder="Search"
+            [formControl]="searchQueryControl" />
+    </div>
+    <div class="add-div">
+        <button type="button" class="btn btn-primary add-anchor" (click)="goToAddPage()">Add</button>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Size (Bytes)</th>
+            <th>Is Completed</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let project of filteredProjects$ | async">
+            <td>{{ project.name }}</td>
+            <td>{{ project.author }}</td>
+            <td>{{ project.sizeInBytes }}</td>
+            <td>{{ project.isCompleted }}</td>
+            <td><button type="button" class="btn btn-success" (click)="goToProject(project.id)">Edit</button></td>
+        </tr>
+    </tbody>
+</table>
