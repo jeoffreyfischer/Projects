@@ -1,1 +1,44 @@
-<p>project-form works!</p>
+<h1>Client Details</h1>
+
+<div class="buttons-top">
+    <button type="button" class="btn btn-info" (click)="goToListPage()">Home</button>
+    <button *ngIf="!isAddMode" type="button" class="btn btn-danger" (click)="deleteClient()">Delete</button>
+</div>
+
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="form">
+                <label for="name">Name: </label>
+                <input id="name" type="text" formControlName="name" placeholder="Name" autocomplete="off"
+                    class="form-control text-center">
+
+                <label for="author">Author: </label>
+                <input id="author" type="text" formControlName="author" placeholder="Author"
+                    class="form-control text-center">
+
+                <label for="description">Description: </label>
+                <input id="description" type="text" formControlName="description" placeholder="Description"
+                    class="form-control text-center">
+
+                <label for="sizeInBytes">Size (Bytes): </label>
+                <input id="sizeInBytes" type="number" formControlName="sizeInBytes" placeholder="Size (Bytes)"
+                    class="form-control text-center">
+
+                <div>
+                    <label for="isCompleted">Is Completed: </label>
+                    <input id="isCompleted" type="checkbox" formControlName="isCompleted" class="form-check-input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="buttons-bottom">
+                <button type="submit" class="btn btn-success" [disabled]="!projectForm.valid">Save</button>
+                <button type="button" class="btn btn-warning" (click)="goToListPage()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

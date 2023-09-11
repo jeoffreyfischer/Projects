@@ -1,0 +1,16 @@
+.buttons-top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form {
+    margin-top: 2rem;
+    width: 30%;
+  }
+  
+  .buttons-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+    margin-top: 2rem;
+  }

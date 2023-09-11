@@ -22,7 +22,7 @@ export class ProjectService {
   }
 
   getProject(id: number): Observable<ProjectInfoDTO> {
-    return this.http.get<ProjectInfoDTO>(`${this.projectsURL}/GetById/${id}`, this.httpOptions);
+    return this.http.get<ProjectInfoDTO>(`${this.projectsURL}/Get/${id}`, this.httpOptions);
   }
 
   addProject(project: ProjectInfoDTO): Observable<HttpResponse<any>> {

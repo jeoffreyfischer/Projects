@@ -27,6 +27,7 @@ export class ProjectsListComponent implements OnInit {
         startWith(this.searchQueryControl.value),
         switchMap(searchText => {
           if (!searchText || searchText.trim() === '') {
+            console.log("empty search")
             return this.projectService.getProjects();
           }
           else {

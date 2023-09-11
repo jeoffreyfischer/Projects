@@ -35,11 +35,11 @@ namespace project_api.Controllers
         }
 
         [HttpGet("Get/{id}")]
-        public async Task<ActionResult<ProjectInfoDTO>> GetById(int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<ProjectInfoDTO>> Get(int id, CancellationToken cancellationToken = default)
         {
             try
             {
-                var project = await _projectService.GetById(id, cancellationToken);
+                var project = await _projectService.Get(id, cancellationToken);
                 return Ok(project);
             }
             catch (NotFoundException ex)
@@ -60,7 +60,7 @@ namespace project_api.Controllers
             try
             {
                 await _projectService.Add(projectInfoDTO, cancellationToken);
-                return CreatedAtAction(nameof(GetById), new { id = projectInfoDTO.Id }, projectInfoDTO);
+                return CreatedAtAction(nameof(Get), new { id = projectInfoDTO.Id }, projectInfoDTO);
             }
             catch (ArgumentException ex)
             {
@@ -131,11 +131,6 @@ namespace project_api.Controllers
             {
                 var projects = await _projectService.SearchByName(searchTerm, cancellationToken);
                 return Ok(projects);
-            }
-            catch (NotFoundException ex)
-            {
-                _logger.LogError(ex, "NotFoundException occurred.");
-                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

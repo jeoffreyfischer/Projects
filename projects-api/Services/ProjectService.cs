@@ -51,7 +51,7 @@ public class ProjectService
         return ProjectDisplayDTO;
     }
 
-    public async Task<ProjectInfoDTO> GetById(int id, CancellationToken cancellationToken)
+    public async Task<ProjectInfoDTO> Get(int id, CancellationToken cancellationToken)
     {
         var project = await _context.Projects.FindAsync(id, cancellationToken);
         if (project == null)
@@ -124,7 +124,7 @@ public class ProjectService
     {
         var cleanedSearchTerm = searchTerm.Trim().ToLower();
         var projects = await _context.Projects
-            .Where(i => i.Name.Contains(cleanedSearchTerm) || i.Description.Contains(cleanedSearchTerm))
+            .Where(i => i.Name.Contains(cleanedSearchTerm))
             .Select(i => new ProjectInfoDTO
             {
                 Id = i.Id,
@@ -135,11 +135,6 @@ public class ProjectService
                 IsCompleted = i.IsCompleted
             })
             .ToListAsync(cancellationToken);
-
-        if (projects.Count == 0)
-        {
-            throw new NotFoundException($"Project with string '{searchTerm}' not found.");
-        }
 
         return projects;
     }
