@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace client_api.Services
+namespace projects_api.Services
 {
     [Serializable]
     internal class NotFoundException : Exception

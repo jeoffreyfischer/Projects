@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using projects_api.Data;
+using projects_api.Services;
 
 string MyAngularFrontend = "MyAngularFrontend";
 
@@ -21,6 +22,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ProjectService>();
 
 var app = builder.Build();
 
