@@ -25,13 +25,12 @@ export class ProjectsListComponent implements OnInit {
         debounceTime(500),
         distinctUntilChanged(),
         startWith(this.searchQueryControl.value),
-        switchMap(searchText => {
-          if (!searchText || searchText.trim() === '') {
-            console.log("empty search")
+        switchMap(query => {
+          if (!query || query.trim() === '') {
             return this.projectService.getProjects();
           }
           else {
-            return this.projectService.searchProjects(searchText);
+            return this.projectService.searchProjects(query);
           }
         })
       )
